@@ -1,1 +1,45 @@
+name: Watch Issues
 
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml requests
+
+      - name: Watch Issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          python scripts/watch_issues.py
+
+      - name: Commit database
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add data/notified.json
+
+          git diff --cached --quiet || \
+          git commit -m "update notified issues"
+
+          git push
