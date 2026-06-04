@@ -4,10 +4,10 @@ repos:
       - good first issue
       - help wanted
 
-  - repo: microsoft/vscode
+  - repo: sillytavern/SillyTavern
     labels:
       - good first issue
 
-  - repo: flutter/flutter
+  - repo: apache/mahout
     labels:
       - good first issue
