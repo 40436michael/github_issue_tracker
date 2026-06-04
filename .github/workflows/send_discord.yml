@@ -1,19 +1,17 @@
 name: send_discord
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   main:
-    name: send_discord
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Notify Discord
-        uses: ./
+    steps:
+      - name: Send Discord notification
+        uses: stegzilla/discord-notify@v5
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: "Hello, from Github"
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: GitHub Issue Tracker
+          message: |
+            Hello from GitHub Actions 🚀
