@@ -1,4 +1,4 @@
-name: main
+name: send_discord
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   main:
-    name: main
+    name: send_discord
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
