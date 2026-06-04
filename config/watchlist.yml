@@ -1,0 +1,13 @@
+repos:
+  - repo: ankitects/anki
+    labels:
+      - good first issue
+      - help wanted
+
+  - repo: microsoft/vscode
+    labels:
+      - good first issue
+
+  - repo: flutter/flutter
+    labels:
+      - good first issue
