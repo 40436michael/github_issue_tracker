@@ -45,6 +45,7 @@ for item in config["repos"]:
         r.raise_for_status()
 
         issues = r.json()["items"]
+        print("Loading watchlist...")
         print("=" * 50)
         print("Repo:", repo)
         print("Label:", label)
@@ -57,6 +58,7 @@ for item in config["repos"]:
             new_ids.add(issue_id)
 
             if issue_id in notified:
+                print("Already notified:", issue["title"])
                 continue
 
             msg = {
@@ -68,7 +70,17 @@ for item in config["repos"]:
                 f"{issue['html_url']}"
             }
 
-            requests.post(webhook, json=msg, timeout=30)
+            resp = requests.post(
+                webhook,
+                json=msg,
+                timeout=30
+            )
+            
+            print(
+                "Discord:",
+                resp.status_code,
+                issue["title"]
+            )
 
             print("Notify:", issue["title"])
 
