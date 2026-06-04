@@ -6,7 +6,7 @@ repos:
 
   - repo: sillytavern/SillyTavern
     labels:
-      - good first issue
+      - 👩‍💻 Good First Issue
 
   - repo: apache/mahout
     labels:
