@@ -45,7 +45,11 @@ for item in config["repos"]:
         r.raise_for_status()
 
         issues = r.json()["items"]
-
+        print("=" * 50)
+        print("Repo:", repo)
+        print("Label:", label)
+        print("Found:", len(issues))
+        
         for issue in issues:
 
             issue_id = issue["id"]
