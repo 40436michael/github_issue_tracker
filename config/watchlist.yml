@@ -11,3 +11,6 @@ repos:
   - repo: apache/mahout
     labels:
       - good first issue
+    - repo: revanced/revanced-manager
+    labels:
+      - Easy
