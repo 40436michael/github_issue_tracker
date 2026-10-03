@@ -14,3 +14,7 @@ repos:
   - repo: revanced/revanced-manager
     labels:
       - Easy
+  - repo: ray-project/kuberay
+    labels:
+      - good-first-issue
+
