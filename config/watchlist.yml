@@ -17,4 +17,7 @@ repos:
   - repo: ray-project/kuberay
     labels:
       - good-first-issue
+  - repo: vllm-project/vllm
+    labels:
+      - good first issue
 
