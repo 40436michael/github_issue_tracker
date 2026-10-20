@@ -51,12 +51,11 @@ for item in config["repos"]:
         print("Repo:", repo)
         print("Label:", label)
 
-        q = f'repo:{repo} label:"{label}" state:open'
-
+        # 用 repo 專屬的 Issues API，不走 Search API（不會有 422 "cannot be searched" 的問題）
         try:
             r = requests.get(
-                "https://api.github.com/search/issues",
-                params={"q": q},
+                f"https://api.github.com/repos/{repo}/issues",
+                params={"labels": label, "state": "open", "per_page": 100},
                 headers=headers,
                 timeout=30,
             )
@@ -66,7 +65,8 @@ for item in config["repos"]:
             print(f"Failed for {repo} / {label}: {e}\n{body}", flush=True)
             continue
 
-        issues = r.json()["items"]
+        # Issues API 也會回傳 PR，把它們濾掉
+        issues = [i for i in r.json() if "pull_request" not in i]
         print("Found:", len(issues))
 
         for issue in issues:
